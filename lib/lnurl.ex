@@ -1,4 +1,6 @@
 defmodule Lnurl do
+  alias Lnurl.LnurlService
+
   @moduledoc """
   Documentation for `Lnurl`.
   """
@@ -17,5 +19,12 @@ defmodule Lnurl do
       {:ok, "lnurl", url} -> {:ok, url}
       {:error, reason} -> { :error, "Unable to parse: #{reason}" }
     end
+  end
+
+  @doc """
+  Takes an LNURL URL to and returns the payment request details
+  """
+  def get_pay_data(url) do
+    LnurlService.get_pay_data(url)
   end
 end
