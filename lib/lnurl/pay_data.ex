@@ -5,9 +5,23 @@ defmodule Lnurl.PayData do
 
   def from_server(map) do
     remap = for {key, val} <- map, into: %{} do
-      {String.to_existing_atom(Macro.underscore(key)), val}
+      atom = convert_key(key)
+      { atom, convert_value(atom, val) }
     end
 
     struct(Lnurl.PayData, remap)
   end
+
+  defp convert_key(key) when is_binary(key) do
+    String.to_existing_atom(Macro.underscore(key))
+  end
+
+  defp convert_value(atom, val) when atom == :metadata do
+    case Poison.decode(val) do
+      { :ok, parsed } -> parsed
+      { :error, reason } -> val
+    end
+  end
+
+  defp convert_value(_key, val), do: val
 end

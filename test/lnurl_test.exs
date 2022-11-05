@@ -16,7 +16,7 @@ defmodule LnurlTest do
       callback: "https://api.url.com/api/v1/lnurl/payreq/33",
       comment_allowed: 32,
       max_sendable: 100000000000,
-      metadata: "[[\"text/plain\",\"Pay to Wallet of Satoshi user: skilledcrawdad81\"],[\"text/identifier\",\"skilledcrawdad81@walletofsatoshi.com\"]]",
+      metadata: [["text/plain", "Pay to Wallet of Satoshi user: skilledcrawdad81"], ["text/identifier", "skilledcrawdad81@walletofsatoshi.com"]],
       min_sendable: 1000,
       tag: "payRequest"
     }
