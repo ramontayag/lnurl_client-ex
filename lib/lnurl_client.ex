@@ -2,7 +2,8 @@ defmodule LnurlClient do
   alias LnurlClient.LnurlService
 
   @moduledoc """
-  Documentation for `LnurlClient`.
+  This is the module you will probably be interacting with.
+  It is meant to be the public interface of the library.
   """
 
   @doc """
