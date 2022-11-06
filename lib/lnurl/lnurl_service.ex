@@ -1,7 +1,7 @@
-defmodule Lnurl.LnurlService do
-  alias Lnurl.PayData
-  alias Lnurl.LightingAddress
-  alias Lnurl.InvoiceResponse
+defmodule LnurlClient.LnurlService do
+  alias LnurlClient.PayData
+  alias LnurlClient.LightingAddress
+  alias LnurlClient.InvoiceResponse
 
   @spec get_pay_data(url :: String.t()) :: {:ok, %PayData{}}
   def get_pay_data(str) do

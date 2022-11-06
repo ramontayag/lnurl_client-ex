@@ -1,4 +1,4 @@
-defmodule Lnurl.Application do
+defmodule LnurlClient.Application do
 
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
@@ -10,7 +10,7 @@ defmodule Lnurl.Application do
   def start(_type, args) do
     children = case args do
       [env: :prod] -> []
-      [env: :test] -> [{Plug.Cowboy, scheme: :http, plug: Lnurl.MockServer, options: [port: 8081]}]
+      [env: :test] -> [{Plug.Cowboy, scheme: :http, plug: LnurlClient.MockServer, options: [port: 8081]}]
       [env: :dev] -> []
       [_] -> []
     end

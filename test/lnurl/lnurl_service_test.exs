@@ -1,7 +1,7 @@
 defmodule LnurlServiceTest do
 
-  alias Lnurl.LnurlService
-  alias Lnurl.PayData
+  alias LnurlClient.LnurlService
+  alias LnurlClient.PayData
   use ExUnit.Case
   doctest LnurlService
 

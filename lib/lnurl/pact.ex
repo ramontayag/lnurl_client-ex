@@ -1,4 +1,4 @@
-# defmodule Lnurl.Pact do
+# defmodule LnurlClient.Pact do
 
 #   use Pact
 #   register :lnurl_service, LnurlService
@@ -6,4 +6,4 @@
 
 # end
 
-# Lnurl.Pact.start_link
+# LnurlClient.Pact.start_link

@@ -1,6 +1,6 @@
-defmodule Lnurl.LightingAddress do
+defmodule LnurlClient.LightingAddress do
 
-  alias Lnurl.LightingAddress
+  alias LnurlClient.LightingAddress
   defstruct [:username, :host]
 
   @lnurl_pay_path "/.well-known/lnurlp/:username"

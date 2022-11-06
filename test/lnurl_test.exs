@@ -1,17 +1,17 @@
 defmodule LnurlTest do
   use ExUnit.Case
-  doctest Lnurl
+  doctest LnurlClient
 
-  alias Lnurl.PayData
+  alias LnurlClient.PayData
 
   test "#decode handles non-lnurl strings" do
-    assert Lnurl.decode("LNURLINVALID") ==
+    assert LnurlClient.decode("LNURLINVALID") ==
       {:error, "Unable to parse: no_seperator"}
   end
 
   # TODO: avoid duplicate tests. LnurlService has the same one, but this is here because this is the public interface
   test "#get_pay_data/1 returns LNURL pay data" do
-    { :ok, received_pay_data } = Lnurl.get_pay_data("http://localhost:8081/.well-known/lnurlp/username")
+    { :ok, received_pay_data } = LnurlClient.get_pay_data("http://localhost:8081/.well-known/lnurlp/username")
     expected_pay_data = %PayData{
       callback: "http://localhost:8081/api/v1/lnurl/payreq/33",
       comment_allowed: 32,

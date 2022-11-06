@@ -1,4 +1,4 @@
-defmodule Lnurl.MockServer do
+defmodule LnurlClient.MockServer do
 
   use Plug.Router
 

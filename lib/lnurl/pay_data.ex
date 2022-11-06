@@ -1,4 +1,4 @@
-defmodule Lnurl.PayData do
+defmodule LnurlClient.PayData do
   defstruct [:callback, :max_sendable, :min_sendable, :metadata, :tag, :comment_allowed]
 
   require Logger
@@ -9,7 +9,7 @@ defmodule Lnurl.PayData do
       { atom, convert_value(atom, val) }
     end
 
-    struct(Lnurl.PayData, remap)
+    struct(LnurlClient.PayData, remap)
   end
 
   defp convert_key(key) when is_binary(key) do

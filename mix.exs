@@ -1,9 +1,9 @@
-defmodule Lnurl.MixProject do
+defmodule LnurlClient.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :lnurl,
+      app: :lnurl_client,
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule Lnurl.MixProject do
   def application do
     [
       extra_applications: extra_applications(Mix.env),
-      mod: {Lnurl.Application, [env: Mix.env]},
+      mod: {LnurlClient.Application, [env: Mix.env]},
     ]
   end
 

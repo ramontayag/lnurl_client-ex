@@ -1,7 +1,7 @@
-defmodule Lnurl.InvoiceResponseTest do
+defmodule LnurlClient.InvoiceResponseTest do
 
   use ExUnit.Case
-  alias Lnurl.InvoiceResponse
+  alias LnurlClient.InvoiceResponse
 
   describe "parse/1 when json is given" do
     test "it parses the JSON and returns a InvoiceResponse struct" do

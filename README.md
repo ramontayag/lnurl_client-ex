@@ -1,4 +1,4 @@
-# Lnurl
+# LnurlClient
 
 **TODO: Add description**
 
@@ -10,7 +10,7 @@ by adding `lnurl` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:lnurl, "~> 0.1.0"}
+    {:lnurl_client, "~> 0.1.0"}
   ]
 end
 ```

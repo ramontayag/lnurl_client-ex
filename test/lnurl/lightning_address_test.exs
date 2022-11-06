@@ -1,7 +1,7 @@
 defmodule LightningAddressTest do
 
   use ExUnit.Case
-  alias Lnurl.LightingAddress
+  alias LnurlClient.LightingAddress
   doctest LightingAddress
 
   describe "parse/1 given a lightning address" do

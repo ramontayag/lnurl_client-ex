@@ -1,6 +1,6 @@
-defmodule Lnurl.PayData.Test do
+defmodule LnurlClient.PayData.Test do
 
-  alias Lnurl.PayData
+  alias LnurlClient.PayData
 
   use ExUnit.Case
   doctest PayData

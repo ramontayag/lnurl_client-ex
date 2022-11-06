@@ -1,6 +1,6 @@
-defmodule Lnurl.InvoiceResponse do
+defmodule LnurlClient.InvoiceResponse do
   defstruct [:pr, :routes]
-  alias Lnurl.InvoiceResponse
+  alias LnurlClient.InvoiceResponse
 
   def parse(json) when is_binary(json) do
     { :ok, attrs } = Poison.decode(json)

@@ -1,8 +1,8 @@
-defmodule Lnurl do
-  alias Lnurl.LnurlService
+defmodule LnurlClient do
+  alias LnurlClient.LnurlService
 
   @moduledoc """
-  Documentation for `Lnurl`.
+  Documentation for `LnurlClient`.
   """
 
   @doc """
@@ -10,7 +10,7 @@ defmodule Lnurl do
 
   ## Examples
 
-      iex> Lnurl.decode("LNURL1DP68GURN8GHJ7UM9WFMXJCM99E3K7MF0V9CXJ0M385EKVCENXC6R2C35XVUKXEFCV5MKVV34X5EKZD3EV56NYD3HXQURZEPEXEJXXEPNXSCRVWFNV9NXZCN9XQ6XYEFHVGCXXCMYXYMNSERXFQ5FNS")
+      iex> LnurlClient.decode("LNURL1DP68GURN8GHJ7UM9WFMXJCM99E3K7MF0V9CXJ0M385EKVCENXC6R2C35XVUKXEFCV5MKVV34X5EKZD3EV56NYD3HXQURZEPEXEJXXEPNXSCRVWFNV9NXZCN9XQ6XYEFHVGCXXCMYXYMNSERXFQ5FNS")
       {:ok, "https://service.com/api?q=3fc3645b439ce8e7f2553a69e5267081d96dcd340693afabe04be7b0ccd178df"}
 
   """
@@ -26,10 +26,10 @@ defmodule Lnurl do
 
   ## Examples
 
-      iex> Lnurl.get_pay_data("username@localhost:8081")
+      iex> LnurlClient.get_pay_data("username@localhost:8081")
       {
         :ok,
-        %Lnurl.PayData{
+        %LnurlClient.PayData{
           callback: "http://localhost:8081/api/v1/lnurl/payreq/33",
           comment_allowed: 32,
           max_sendable: 100000000000,
@@ -49,8 +49,8 @@ defmodule Lnurl do
 
   ## Examples
 
-      iex> Lnurl.create_invoice("username@localhost:8081", 10_000_000)
-      { :ok, %Lnurl.InvoiceResponse{pr: "lninvoice", routes: []} }
+      iex> LnurlClient.create_invoice("username@localhost:8081", 10_000_000)
+      { :ok, %LnurlClient.InvoiceResponse{pr: "lninvoice", routes: []} }
   """
   def create_invoice(str, amount) do
     LnurlService.create_invoice(str, amount)
