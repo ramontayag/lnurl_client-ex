@@ -3,7 +3,9 @@ defmodule LnurlClient.PayData do
 
   require Logger
 
-  def from_server(map) do
+  def parse(json) do
+    map = Poison.decode!(json)
+
     remap = for {key, val} <- map, into: %{} do
       atom = convert_key(key)
       { atom, convert_value(atom, val) }

@@ -5,11 +5,10 @@ defmodule LnurlClient.LnurlService do
 
   @spec get_pay_data(url :: String.t()) :: {:ok, %PayData{}}
   def get_pay_data(str) do
-    pay_data = str
+    response = str
                |> convert_to_lnurl_pay_url
-               |> HTTPoison.get
-               |> decode_body
-               |> PayData.from_server
+               |> HTTPoison.get!
+    pay_data = response.body |> PayData.parse
 
     { :ok, pay_data }
   end

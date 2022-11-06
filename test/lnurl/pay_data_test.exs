@@ -5,7 +5,7 @@ defmodule LnurlClient.PayData.Test do
   use ExUnit.Case
   doctest PayData
 
-  describe "from_server/1 when metadata is an escaped list" do
+  describe "parse/1 when metadata is an escaped list" do
     test "takes parsed json from the server and returns a struct of PayData, parsing metadata again" do
       body = %{
         "callback" => "http://localhost:8081",
@@ -14,9 +14,9 @@ defmodule LnurlClient.PayData.Test do
         "metadata" => "[[\"text/plain\",\"To user: abc\"],[\"text/identifier\",\"abc@url.com\"]]",
         "minSendable" => 1000,
         "tag" => "payRequest"
-      }
+      } |> Poison.encode!
 
-      pay_data = PayData.from_server(body)
+      pay_data = PayData.parse(body)
 
       assert pay_data.metadata == [
         ["text/plain", "To user: abc"],
@@ -25,7 +25,7 @@ defmodule LnurlClient.PayData.Test do
     end
   end
 
-  describe "from_server/1 when metadata is not escaped" do
+  describe "parse/1 when metadata is not escaped" do
     test "takes parsed json from the server and returns a struct of PayData" do
       body = %{
         "callback" => "http://localhost:8081",
@@ -37,9 +37,9 @@ defmodule LnurlClient.PayData.Test do
         ],
         "minSendable" => 1000,
         "tag" => "payRequest"
-      }
+      } |> Poison.encode!
 
-      pay_data = PayData.from_server(body)
+      pay_data = PayData.parse(body)
 
       assert pay_data.metadata == [
         ["text/plain", "To user: abc"],
