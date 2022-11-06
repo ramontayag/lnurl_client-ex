@@ -13,7 +13,7 @@ defmodule LnurlTest do
   test "#get_pay_data/1 returns LNURL pay data" do
     { :ok, received_pay_data } = Lnurl.get_pay_data("http://localhost:8081/.well-known/lnurlp/username")
     expected_pay_data = %PayData{
-      callback: "https://api.url.com/api/v1/lnurl/payreq/33",
+      callback: "http://localhost:8081/api/v1/lnurl/payreq/33",
       comment_allowed: 32,
       max_sendable: 100000000000,
       metadata: [["text/plain", "Pay to Wallet of Satoshi user: skilledcrawdad81"], ["text/identifier", "skilledcrawdad81@walletofsatoshi.com"]],
@@ -23,4 +23,5 @@ defmodule LnurlTest do
 
     assert received_pay_data == expected_pay_data
   end
+
 end

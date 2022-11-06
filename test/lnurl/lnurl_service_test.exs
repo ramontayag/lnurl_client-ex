@@ -13,7 +13,7 @@ defmodule LnurlServiceTest do
         LnurlService.get_pay_data("http://localhost:8081/.well-known/lnurlp/username")
 
       expected_pay_data = %PayData{
-        callback: "https://api.url.com/api/v1/lnurl/payreq/33",
+        callback: "http://localhost:8081/api/v1/lnurl/payreq/33",
         comment_allowed: 32,
         max_sendable: 100000000000,
         metadata: [["text/plain", "Pay to Wallet of Satoshi user: skilledcrawdad81"], ["text/identifier", "skilledcrawdad81@walletofsatoshi.com"]],
@@ -31,7 +31,7 @@ defmodule LnurlServiceTest do
         LnurlService.get_pay_data("username@localhost:8081")
 
       expected_pay_data = %PayData{
-        callback: "https://api.url.com/api/v1/lnurl/payreq/33",
+        callback: "http://localhost:8081/api/v1/lnurl/payreq/33",
         comment_allowed: 32,
         max_sendable: 100000000000,
         metadata: [["text/plain", "Pay to Wallet of Satoshi user: skilledcrawdad81"], ["text/identifier", "skilledcrawdad81@walletofsatoshi.com"]],

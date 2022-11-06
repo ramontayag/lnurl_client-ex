@@ -1,23 +1,36 @@
 defmodule Lnurl.LnurlService do
   alias Lnurl.PayData
-  alias Lnurl.LnurlService.Behaviour
   alias Lnurl.LightingAddress
-  @behaviour Behaviour
+  alias Lnurl.InvoiceResponse
 
-  @impl Behaviour
+  @spec get_pay_data(url :: String.t()) :: {:ok, %PayData{}}
   def get_pay_data(str) do
     pay_data = str
                |> convert_to_lnurl_pay_url
                |> HTTPoison.get
-               |> handle_response
+               |> decode_body
+               |> PayData.from_server
 
     { :ok, pay_data }
   end
 
-  defp handle_response({:ok, %{body: body}}) do
-    body
-    |> Poison.decode!
-    |> PayData.from_server
+  @spec create_invoice(String.t(), integer()) :: {atom(), any()}
+  def create_invoice(url_or_lightning_address, amount) do
+    { :ok, pay_data } = url_or_lightning_address |> get_pay_data
+    query = %{amount: amount} |> URI.encode_query
+    callback_url = pay_data.callback
+                   |> URI.parse
+                   |> URI.append_query(query)
+                   |> URI.to_string
+
+    case HTTPoison.get(callback_url) do
+      {:ok, %{body: body}} -> InvoiceResponse.parse(body)
+      {:error, reason} -> {:error, "unable to create invoice: #{reason}"}
+    end
+  end
+
+  defp decode_body({:ok, %{body: body}}) do
+    body |> Poison.decode!
   end
 
   defp convert_to_lnurl_pay_url(str) do
