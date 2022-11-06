@@ -14,6 +14,15 @@ defmodule LnurlClient.PayData do
     struct(LnurlClient.PayData, remap)
   end
 
+  def callback_with_amount(pay_data, amount) do
+    query = %{amount: amount} |> URI.encode_query
+
+    pay_data.callback
+    |> URI.parse
+    |> URI.append_query(query)
+    |> URI.to_string
+  end
+
   defp convert_key(key) when is_binary(key) do
     String.to_existing_atom(Macro.underscore(key))
   end

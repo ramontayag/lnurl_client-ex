@@ -16,20 +16,9 @@ defmodule LnurlClient.LnurlService do
   @spec create_invoice(String.t(), integer()) :: {atom(), any()}
   def create_invoice(url_or_lightning_address, amount) do
     { :ok, pay_data } = url_or_lightning_address |> get_pay_data
-    query = %{amount: amount} |> URI.encode_query
-    callback_url = pay_data.callback
-                   |> URI.parse
-                   |> URI.append_query(query)
-                   |> URI.to_string
 
-    case HTTPoison.get(callback_url) do
-      {:ok, %{body: body}} -> InvoiceResponse.parse(body)
-      {:error, reason} -> {:error, "unable to create invoice: #{reason}"}
-    end
-  end
-
-  defp decode_body({:ok, %{body: body}}) do
-    body |> Poison.decode!
+    PayData.callback_with_amount(pay_data, amount)
+    |> get_invoice_response
   end
 
   defp convert_to_lnurl_pay_url(str) do
@@ -37,6 +26,13 @@ defmodule LnurlClient.LnurlService do
       { :ok, lightning_address = %LightingAddress{} } ->
         lightning_address |> LightingAddress.convert_to_lnurl_pay_url
       { :error, _reason } -> str
+    end
+  end
+
+  defp get_invoice_response(url) do
+    case HTTPoison.get(url) do
+      {:ok, %{body: body}} -> InvoiceResponse.parse(body)
+      {:error, reason} -> {:error, "unable to create invoice: #{reason}"}
     end
   end
 

@@ -48,4 +48,13 @@ defmodule LnurlClient.PayData.Test do
     end
   end
 
+  describe "callback_with_amount/2" do
+    test "it returns the callback url of the given pay_data with the amount" do
+      pay_data = %PayData{callback: "https://a.com"}
+      callback = PayData.callback_with_amount(pay_data, 200)
+
+      assert callback == "https://a.com?amount=200"
+    end
+  end
+
 end
