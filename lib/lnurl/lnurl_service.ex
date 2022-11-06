@@ -4,8 +4,8 @@ defmodule LnurlClient.LnurlService do
   alias LnurlClient.InvoiceResponse
 
   @spec get_pay_data(url :: String.t()) :: {:ok, %PayData{}}
-  def get_pay_data(str) do
-    response = str
+  def get_pay_data(url_or_lightning_address) do
+    response = url_or_lightning_address
                |> convert_to_lnurl_pay_url
                |> HTTPoison.get!
     pay_data = response.body |> PayData.parse
