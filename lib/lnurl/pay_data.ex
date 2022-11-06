@@ -19,7 +19,7 @@ defmodule LnurlClient.PayData do
   defp convert_value(atom, val) when atom == :metadata do
     case Poison.decode(val) do
       { :ok, parsed } -> parsed
-      { :error, reason } -> val
+      { :error, _reason } -> val
     end
   end
 
