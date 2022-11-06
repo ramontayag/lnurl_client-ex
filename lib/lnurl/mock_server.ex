@@ -9,7 +9,7 @@ defmodule Lnurl.MockServer do
   plug :match
   plug :dispatch
 
-  get "/.well-known/lnurlp/successful-call" do
+  get("/.well-known/lnurlp/username") do
     body = %{
       "callback" => "https://api.url.com/api/v1/lnurl/payreq/33",
       "commentAllowed" => 32,

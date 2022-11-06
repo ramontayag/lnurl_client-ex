@@ -11,7 +11,7 @@ defmodule LnurlTest do
 
   # TODO: avoid duplicate tests. LnurlService has the same one, but this is here because this is the public interface
   test "#get_pay_data/1 returns LNURL pay data" do
-    received_pay_data = Lnurl.get_pay_data("http://localhost:8081/.well-known/lnurlp/successful-call")
+    { :ok, received_pay_data } = Lnurl.get_pay_data("http://localhost:8081/.well-known/lnurlp/username")
     expected_pay_data = %PayData{
       callback: "https://api.url.com/api/v1/lnurl/payreq/33",
       comment_allowed: 32,

@@ -6,10 +6,12 @@ defmodule Lnurl.LnurlService do
 
   @impl Behaviour
   def get_pay_data(str) do
-    str
-    |> convert_to_lnurl_pay_url
-    |> HTTPoison.get
-    |> handle_response
+    pay_data = str
+               |> convert_to_lnurl_pay_url
+               |> HTTPoison.get
+               |> handle_response
+
+    { :ok, pay_data }
   end
 
   defp handle_response({:ok, %{body: body}}) do

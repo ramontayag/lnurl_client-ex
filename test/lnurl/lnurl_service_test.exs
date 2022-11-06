@@ -9,7 +9,9 @@ defmodule LnurlServiceTest do
 
   describe "#get_pay_data/1 given LNURL Pay URL" do
     test "returns %PayData" do
-      received_pay_data = LnurlService.get_pay_data("http://localhost:8081/.well-known/lnurlp/successful-call")
+      { :ok, received_pay_data } =
+        LnurlService.get_pay_data("http://localhost:8081/.well-known/lnurlp/username")
+
       expected_pay_data = %PayData{
         callback: "https://api.url.com/api/v1/lnurl/payreq/33",
         comment_allowed: 32,
@@ -25,7 +27,9 @@ defmodule LnurlServiceTest do
 
   describe "#get_pay_data/1 given a Lightning Address" do
     test "returns %PayData" do
-      received_pay_data = LnurlService.get_pay_data("successful-call@localhost:8081")
+      { :ok, received_pay_data } =
+        LnurlService.get_pay_data("username@localhost:8081")
+
       expected_pay_data = %PayData{
         callback: "https://api.url.com/api/v1/lnurl/payreq/33",
         comment_allowed: 32,

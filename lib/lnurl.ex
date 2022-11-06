@@ -22,7 +22,23 @@ defmodule Lnurl do
   end
 
   @doc """
-  Takes an LNURL URL to and returns the payment request details
+  Takes an LNURL URL or Lightning Address to and returns the payment request details
+
+  ## Examples
+
+      iex> Lnurl.get_pay_data("username@localhost:8081")
+      {
+        :ok,
+        %Lnurl.PayData{
+          callback: "https://api.url.com/api/v1/lnurl/payreq/33",
+          comment_allowed: 32,
+          max_sendable: 100000000000,
+          metadata: [["text/plain", "Pay to Wallet of Satoshi user: skilledcrawdad81"], ["text/identifier", "skilledcrawdad81@walletofsatoshi.com"]],
+          min_sendable: 1000,
+          tag: "payRequest"
+        }
+      }
+
   """
   def get_pay_data(url) do
     LnurlService.get_pay_data(url)
